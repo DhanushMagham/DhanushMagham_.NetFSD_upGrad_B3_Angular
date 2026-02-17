@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment Form - Online Learning Platform</title>
+</head>
+<body>
+    <header>
+        <h1 align="center">Course Enrollment Form</h1>
+        <p align="center">Join our platform and start learning today</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Your Information</h2>
+            <form>
+                <div>
+                    <label>Full Name : </label>
+                    <input type="text" id="fullname" name="fullname" required placeholder="Enter your full name">
+                </div>
+
+                <div>
+                    <label>Email Address : </label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                </div>
+
+                <div>
+                    <label>Phone Number : </label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" title="Phone number must be 10 digits" placeholder="Enter 10-digit phone number">
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <h2>Course Selection</h2>
+            <form>
+                <div>
+                    <label>Select or Search Course : </label>
+                    <input type="text" id="course" name="course" list="courselist" required placeholder="Start typing to see suggestions">
+                    <datalist id="courselist">
+                        <option value="Web Development">
+                        <option value="Python Programming">
+                        <option value="Data Science">
+                        <option value="UI/UX Design">
+                        <option value="JavaScript Mastery">
+                        <option value="Mobile App Development">
+                        <option value="Cloud Computing">
+                        <option value="Artificial Intelligence">
+                    </datalist>
+                </div>
+
+                <div>
+                    <label>Current Skill Level : </label>
+                    <select id="skilllevel" name="skilllevel" required>
+                        <option value="">Select your skill level</option>
+                        <option value="1">Beginner</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Advanced</option>
+                        <option value="4">Expert</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Learning Intensity (hours per week) : </label>
+                    <input type="range" id="intensity" name="intensity" min="0" max="40" step="5" value="15">
+                    <span>15 hours/week</span>
+                </div>
+
+                <div>
+                    <label>Expected Completion (days):</label>
+                    <input type="number" id="duration" name="duration" min="7" max="365" value="30" required>
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <h2>Additional Information</h2>
+            <form>
+                <div>
+                    <label>Learning Goal : </label>
+                    <textarea id="goal" name="goal" rows="4" placeholder="What do you want to achieve with this course?"></textarea>
+                </div>
+
+                <div>
+                    <label>Preferred Learning Time : </label>
+                    <select id="availability" name="availability" required>
+                        <option value="">Select preferred time</option>
+                        <option value="morning">Morning (6 AM - 12 PM)</option>
+                        <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+                        <option value="evening">Evening (6 PM - 10 PM)</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the terms and conditions</label>
+                </div>
+
+                <button type="submit">Enroll Now</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>2026 Online Learning Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>
