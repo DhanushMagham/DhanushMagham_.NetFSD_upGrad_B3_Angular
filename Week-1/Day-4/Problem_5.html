@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Analysis Tool</title>
+</head>
+<body>
+    <h1>Number Analysis Tool</h1>
+    <p>Click the button to enter a number and see the analysis.</p>
+    <button onclick="analyzeNumber()">Analyze Number</button>
+    <div id="result"></div>
+    <script>
+        function analyzeNumber() {
+            let num = parseInt(prompt('Enter a number:'));
+            let sign = num > 0 ? 'The number is Positive' : (num < 0 ? 'The number is Negative' : 'The number is Zero');
+            let parity;
+            if (num % 2 === 0) {
+                parity = 'Even';
+            } else {
+                parity = 'Odd';
+            }
+            let numbers = '';
+            for (let i = 1; i <= num; i++) {
+                numbers += i + ' ';
+            }
+            document.getElementById('result').innerHTML = 
+                '<p>Sign: ' + sign + '</p>' +
+                '<p>Parity: ' + parity + '</p>' +
+                '<p>Numbers from 1 to ' + num + ': ' + numbers + '</p>';
+        }
+    </script>
+</body>
+</html>

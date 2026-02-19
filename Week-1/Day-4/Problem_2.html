@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Evaluator</title>
+</head>
+<body>
+    <h1>Student Grade Evaluator</h1>
+    <p>Click the button to enter marks and see the grade.</p>
+    <button onclick="
+        let marks = parseFloat(prompt('Enter the student\'s marks (0-100):'));
+        let grade;
+        if (marks >= 75) {
+            grade = 'Grade A';
+        } else if (marks >= 60) {
+            grade = 'Grade B';
+        } else if (marks >= 40) {
+            grade = 'Grade C';
+        } else {
+            grade = 'Fail';
+        }
+        document.getElementById('result').innerHTML = 'The grade is: ' + grade;
+    ">Calculate Grade</button>
+    <div id="result"></div>
+</body>
+</html>

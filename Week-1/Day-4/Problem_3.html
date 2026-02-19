@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Discount Calculator</title>
+</head>
+<body>
+    <h1>Simple Discount Calculator</h1>
+    <script>
+        let amount = parseFloat(prompt("Enter the purchase amount:")); 
+        let discount = 0;
+        if (amount >= 5000) {
+            discount = amount * 0.20;
+        } else if (amount >= 3000) {
+            discount = amount * 0.10;
+        }
+        let finalAmount = amount - discount;
+        document.write('<p>Purchase Amount: ' + amount + '</p>');
+        document.write('<p>Discount Amount: ' + discount + '</p>');
+        document.write('<p>Final Payable Amount: ' + finalAmount + '</p>');
+    </script>
+</body>
+</html>
