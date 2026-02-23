@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info Display</title>
+</head>
+<body>
+    <h1>User Information</h1>
+    <button id="displayBtn">Display User Info</button>
+    <p id="nameDisplay"></p>
+    <p id="ageDisplay"></p>
+    <p id="cityDisplay"></p>
+
+    <script>
+        let user = {
+            name: "Magham Sai Dhanush",
+            age: 23,
+            city: "Bangalore"
+        };
+
+        function displayUserInfo(userObj) {
+            document.getElementById("nameDisplay").innerHTML = "Name: " + userObj.name;
+            document.getElementById("ageDisplay").innerHTML = "Age: " + userObj.age;
+            document.getElementById("cityDisplay").innerHTML = "City: " + userObj.city;
+        }
+
+        document.getElementById("displayBtn").addEventListener("click", function() {
+            displayUserInfo(user);
+        });
+    </script>
+</body>
+</html>
