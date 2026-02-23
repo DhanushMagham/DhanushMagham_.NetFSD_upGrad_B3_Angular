@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form id="regForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" onchange="validateField('name')"><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" onchange="validateField('email')"><br><br>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" onchange="validateField('age')"><br><br>
+        
+        <button type="button" onclick="registerUser()">Register</button>
+    </form>
+    <div id="messages"></div>
+    
+    <script>
+        function validateField(fieldId) {
+            var field = document.getElementById(fieldId);
+            var value = field.value.trim();
+            var message = '';
+            
+            if (fieldId === 'name' && value === '') {
+                message = 'Name cannot be empty.';
+            } else if (fieldId === 'email' && !value.includes('@')) {
+                message = 'Email must contain "@".';
+            } else if (fieldId === 'age' && (isNaN(value) || value <= 18)) {
+                message = 'Age must be greater than 18.';
+            }
+            
+            displayMessage(fieldId, message);
+        }
+        function displayMessage(fieldId, message) {
+            var messagesDiv = document.getElementById('messages');
+            var existingMsg = messagesDiv.querySelector('#msg-' + fieldId);
+            if (existingMsg) {
+                existingMsg.innerText = message;
+            } else {
+                var newMsg = document.createElement('p');
+                newMsg.id = 'msg-' + fieldId;
+                newMsg.innerText = message;
+                messagesDiv.appendChild(newMsg);
+            }
+        }
+        function registerUser() {
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var age = document.getElementById('age').value.trim();
+            
+            var errors = [];
+            if (name === '') errors.push('Name cannot be empty.');
+            if (!email.includes('@')) errors.push('Email must contain "@".');
+            if (isNaN(age) || age <= 18) errors.push('Age must be greater than 18.');
+            
+            if (errors.length === 0) {
+                var userData = { name: name, email: email, age: parseInt(age) };
+                sessionStorage.setItem('userData', JSON.stringify(userData));
+                document.getElementById('messages').innerHTML = '<p style="color: green;">Registration successful! Data stored.</p>';
+            } else {
+                document.getElementById('messages').innerHTML = '<p style="color: red;">' + errors.join('<br>') + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

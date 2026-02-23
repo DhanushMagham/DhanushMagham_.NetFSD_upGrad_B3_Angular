@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Notes</title>
+</head>
+<body style = "background-color: #d3d3d3;">
+    <h1>Daily Notes</h1>
+    <textarea id="notes" rows="10" cols="50" placeholder="Write your notes here..."></textarea>
+    <br><br>
+    <button onclick="saveNotes()">Save Notes</button>
+    <button onclick="clearNotes()">Clear Notes</button>
+
+    <script>
+        function saveNotes() {
+            var notes = document.getElementById('notes').value;
+            localStorage.setItem('dailyNotes', notes);
+            alert('Notes saved!');
+        }
+        function clearNotes() {
+            document.getElementById('notes').value = '';
+            localStorage.removeItem('dailyNotes');
+            alert('Notes cleared!');
+        }
+        window.onload = function() {
+            var savedNotes = localStorage.getItem('dailyNotes');
+            if (savedNotes) {
+                document.getElementById('notes').value = savedNotes;
+            }
+        };
+    </script>
+</body>
+</html>
