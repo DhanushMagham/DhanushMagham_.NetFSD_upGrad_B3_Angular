@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Profile System</title>
+    <style>
+        #profile {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            margin: 20px;
+        }
+        input {
+            margin: 5px;
+        }
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mini Student Profile System</h1>
+    <div id="profile"></div>
+    
+    <h3>Set Student Profile</h3>
+    <input type="text" id="nameInput" placeholder="Enter Name">
+    <input type="text" id="rollNoInput" placeholder="Enter Roll No">
+    <input type="number" id="marksInput" placeholder="Enter Marks">
+    <button onclick="setProfile()">Set Profile</button>
+    
+    <h3>Update Marks</h3>
+    <input type="number" id="newMarksInput" placeholder="Enter New Marks">
+    <button onclick="updateMarksFromInput()">Update Marks</button>
+
+    <script>
+        var student = {
+            name: "",
+            rollNo: "",
+            marks: 0
+        };
+
+        function updateStudentProfile(studentObj) {
+            var profileDiv = document.getElementById('profile');
+            profileDiv.innerHTML = `
+                <h2>Student Profile</h2>
+                <p><strong>Name:</strong> ${studentObj.name}</p>
+                <p><strong>Roll No:</strong> ${studentObj.rollNo}</p>
+                <p><strong>Marks:</strong> ${studentObj.marks}</p>
+            `;
+        }
+
+        function setProfile() {
+            student.name = document.getElementById('nameInput').value;
+            student.rollNo = document.getElementById('rollNoInput').value;
+            student.marks = parseInt(document.getElementById('marksInput').value);
+            updateStudentProfile(student);
+        }
+
+        function updateMarksFromInput() {
+            var newMarks = parseInt(document.getElementById('newMarksInput').value);
+            student.marks = newMarks;
+            updateStudentProfile(student);
+        }
+
+        updateStudentProfile(student);
+    </script>
+</body>
+</html>
