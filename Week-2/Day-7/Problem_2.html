@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Summary</title>
+</head>
+<body>
+    <h1>Shopping Cart Summary</h1>
+    <label for="products">Enter products in format: name,price,quantity;name2,price2,quantity2 (e.g., Apple,150,3;Banana,80,5):</label>
+    <textarea id="products" rows="4" cols="50" placeholder="Apple,150,3;Banana,80,5"></textarea>
+    <button onclick="generateInvoice()">Generate Invoice</button>
+    <div id="invoice"></div>
+
+    <script>
+        const calculateTotal = (products) => {
+            const itemTotals = products.map(product => product.price * product.quantity);
+            return itemTotals.reduce((total, itemTotal) => total + itemTotal, 0);
+        };
+
+        function generateInvoice() {
+            const input = document.getElementById('products').value;
+            const products = input.split(';').map(item => {
+                const [name, price, quantity] = item.split(',');
+                return { name: name.trim(), price: parseFloat(price.trim()), quantity: parseInt(quantity.trim()) };
+            });
+            
+            const total = calculateTotal(products);
+            const invoiceLines = products.map(product => `${product.name}: ₹${product.price} x ${product.quantity} = ₹${(product.price * product.quantity).toFixed(2)}`);
+            const invoice = invoiceLines.join('<br>') + `<br><strong>Total: ₹${total.toFixed(2)}</strong>`;
+            document.getElementById('invoice').innerHTML = invoice;
+        }
+    </script>
+</body>
+</html>

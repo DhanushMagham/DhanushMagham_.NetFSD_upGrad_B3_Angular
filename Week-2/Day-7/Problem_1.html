@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Analyzer</title>
+</head>
+<body>
+    <h1>Student Marks Analyzer</h1>
+    <label for="marks">Enter student marks separated by commas (e.g., 85,92,78):</label>
+    <input type="text" id="marks" placeholder="85,92,78">
+    <button onclick="analyzeMarks()">Analyze</button>
+    <div id="results"></div>
+
+    <script>
+        function analyzeMarks() {
+            const input = document.getElementById('marks').value;
+            const marks = input.split(',').map(mark => parseFloat(mark.trim()));
+            
+            const total = marks.reduce((sum, mark) => sum + mark, 0);
+            const average = total / marks.length;
+            
+            const result = average >= 50 ? 'Pass' : 'Fail';
+            
+            document.getElementById('results').innerHTML = `
+                <p>Entered marks: ${marks.join(', ')}</p>
+                <p>Total marks: ${total}</p>
+                <p>Average marks: ${average.toFixed(2)}</p>
+                <p>Result: ${result}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
