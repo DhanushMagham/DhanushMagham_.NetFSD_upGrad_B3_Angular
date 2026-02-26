@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem 2 - Vehicle Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .btn-group {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            border-radius: 4px;
+        }
+
+        #btnVehicle {
+            background-color: #2196F3;
+        }
+
+        #btnCar {
+            background-color: #4CAF50;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #output {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: #f4f4f4;
+            border-left: 4px solid #333;
+            min-height: 40px;
+            font-size: 16px;
+            white-space: pre-line;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Problem 2 - Vehicle Management System</h1>
+
+    <div class="input-group">
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" placeholder="Enter vehicle brand">
+    </div>
+
+    <div class="input-group">
+        <label for="speed">Speed (km/h):</label>
+        <input type="number" id="speed" placeholder="Enter speed">
+    </div>
+
+    <div class="input-group">
+        <label for="fuelType">Fuel Type:</label>
+        <input type="text" id="fuelType" placeholder="Enter fuel type (Petrol, Diesel, Electric)">
+    </div>
+
+    <div class="btn-group">
+        <button id="btnVehicle" onclick="showVehicleInfo()">Display Info (Parent)</button>
+        <button id="btnCar" onclick="showCarDetails()">Show Car Details (Child)</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        // Base class
+        class Vehicle {
+            constructor(brand, speed) {
+                this.brand = brand;
+                this.speed = speed;
+            }
+
+            displayInfo() {
+                return `Brand: ${this.brand}\nSpeed: ${this.speed} km/h`;
+            }
+        }
+
+        // Derived class
+        class Car extends Vehicle {
+            constructor(brand, speed, fuelType) {
+                super(brand, speed);
+                this.fuelType = fuelType;
+            }
+
+            showCarDetails() {
+                return `Brand: ${this.brand}\nSpeed: ${this.speed} km/h\nFuel Type: ${this.fuelType}`;
+            }
+        }
+
+        function getCarFromInputs() {
+            const brand = document.getElementById("brand").value.trim();
+            const speed = document.getElementById("speed").value.trim();
+            const fuelType = document.getElementById("fuelType").value.trim();
+
+            if (!brand || !speed || !fuelType) {
+                showOutput("Please fill in all fields.");
+                return null;
+            }
+
+            return new Car(brand, Number(speed), fuelType);
+        }
+
+        function showOutput(text) {
+            const output = document.getElementById("output");
+            output.style.display = "block";
+            output.textContent = text;
+        }
+
+        function showVehicleInfo() {
+            const car = getCarFromInputs();
+            if (car) {
+                showOutput(car.displayInfo());
+            }
+        }
+
+        function showCarDetails() {
+            const car = getCarFromInputs();
+            if (car) {
+                showOutput(car.showCarDetails());
+            }
+        }
+    </script>
+</body>
+
+</html>
