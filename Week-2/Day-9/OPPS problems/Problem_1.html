@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem 1 - Student Class</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .btn-group {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            border-radius: 4px;
+        }
+
+        #btnDetails {
+            background-color: #2196F3;
+        }
+
+        #btnGrade {
+            background-color: #4CAF50;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #output {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: #f4f4f4;
+            border-left: 4px solid #333;
+            min-height: 40px;
+            font-size: 16px;
+            white-space: pre-line;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Problem 1 - Student Class</h1>
+
+    <div class="input-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter student name">
+    </div>
+
+    <div class="input-group">
+        <label for="rollNumber">Roll Number:</label>
+        <input type="number" id="rollNumber" placeholder="Enter roll number">
+    </div>
+
+    <div class="input-group">
+        <label for="marks">Marks:</label>
+        <input type="number" id="marks" placeholder="Enter marks">
+    </div>
+
+    <div class="btn-group">
+        <button id="btnDetails" onclick="showDetails()">Get Details</button>
+        <button id="btnGrade" onclick="showGrade()">Get Grade</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        class Student {
+            constructor(name, rollNumber, marks) {
+                this.name = name;
+                this.rollNumber = rollNumber;
+                this.marks = marks;
+            }
+
+            getDetails() {
+                return `Name: ${this.name}\nRoll Number: ${this.rollNumber}\nMarks: ${this.marks}`;
+            }
+
+            getGrade() {
+                if (this.marks >= 90) {
+                    return "A";
+                } else if (this.marks >= 75) {
+                    return "B";
+                } else if (this.marks >= 50) {
+                    return "C";
+                } else {
+                    return "Fail";
+                }
+            }
+        }
+
+        function getStudentFromInputs() {
+            const name = document.getElementById("name").value.trim();
+            const rollNumber = document.getElementById("rollNumber").value.trim();
+            const marks = Number(document.getElementById("marks").value);
+
+            if (!name || !rollNumber || isNaN(marks)) {
+                showOutput("Please fill in all fields.");
+                return null;
+            }
+
+            return new Student(name, rollNumber, marks);
+        }
+
+        function showOutput(text) {
+            const output = document.getElementById("output");
+            output.style.display = "block";
+            output.textContent = text;
+        }
+
+        function showDetails() {
+            const student = getStudentFromInputs();
+            if (student) {
+                showOutput(student.getDetails());
+            }
+        }
+
+        function showGrade() {
+            const student = getStudentFromInputs();
+            if (student) {
+                showOutput(`Grade: ${student.getGrade()}`);
+            }
+        }
+    </script>
+</body>
+
+</html>
