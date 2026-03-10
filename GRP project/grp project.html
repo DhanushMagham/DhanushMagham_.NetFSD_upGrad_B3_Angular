@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+body{
+    font-family: Arial;
+    margin: 40px;
+}
+
+select, button{
+    padding:8px;
+    margin:10px;
+}
+</style>
+
+</head>
+<body>
+
+<h1> Drop Downs</h1>
+
+<select id = "country">
+    <option value="">Select the Country</option>
+    <option value="India">India</option>
+    <option value="USA">USA</option>
+</select>
+
+<select id = "state">
+    <option value="">Select the State</option>
+</select>
+
+<select id="city">
+    <option value="">Select City</option>
+</select>
+
+<br>
+<button id="submit">Submit</button>
+
+<h4 id = "result"></h4>
+<script>
+    const countryStateInfo = {
+        "India": {
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+            "Gujarat": ["Ahmedabad", "Surat", "Vadodara"],
+            "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur"],
+            "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
+            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
+            "Karnataka": ["Bangalore", "Mysore", "Mangalore"]
+        },
+        "USA": {
+            "California": ["Los Angeles", "San Francisco", "San Diego"],
+            "New York": ["New York City", "Buffalo", "Rochester"],
+            "Florida": ["Miami", "Orlando", "Tampa"],
+            "Illinois": ["Chicago", "Springfield", "Naperville"],
+            "Pennsylvania": ["Philadelphia", "Pittsburgh", "Allentown"],
+            "Texas": ["Houston", "Dallas", "Austin"]
+        }
+    };
+
+    $(document).ready(function() {
+        $('#country').change(function() {
+            const country = $(this).val();
+            const states = countryStateInfo[country] ? Object.keys(countryStateInfo[country]) : [];
+            
+            $('#state').empty().append('<option value="">Select the State</option>');
+            $('#city').empty().append('<option value="">Select City</option>');
+            
+            states.forEach(state => {
+                $('#state').append(`<option value="${state}">${state}</option>`);
+            });
+        });
+
+        $('#state').change(function() {
+            const country = $('#country').val();
+            const state = $(this).val();
+            const cities = countryStateInfo[country] && countryStateInfo[country][state] ? countryStateInfo[country][state] : [];
+            
+            $('#city').empty().append('<option value="">Select City</option>');
+            
+            cities.forEach(city => {
+                $('#city').append(`<option value="${city}">${city}</option>`);
+            });
+        });
+
+        $('#submit').click(function() {
+            const country = $('#country').val();
+            const state = $('#state').val();
+            const city = $('#city').val();
+            $('#result').text(`Selected Location: ${city}, ${state}, ${country}`);
+        });
+    });
+
+</script>
+
+
+</body>
+</html>

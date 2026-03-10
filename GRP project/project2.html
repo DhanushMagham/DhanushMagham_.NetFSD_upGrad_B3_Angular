@@ -1,0 +1,101 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Location Based Dynamic Dropdown</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin: 40px;
+}
+
+select, button{
+    padding:8px;
+    margin:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Auto Detect Location</h2>
+
+<button onclick="getLocation()">Detect My Location</button>
+
+<br><br>
+
+<label>Country</label>
+<select id="country">
+<option>Select Country</option>
+</select>
+
+<br>
+
+<label>State</label>
+<select id="state">
+<option>Select State</option>
+</select>
+
+<br>
+
+<label>City</label>
+<select id="city">
+<option>Select City</option>
+</select>
+
+<p id="result"></p>
+
+<script>
+
+function getLocation(){
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+    }
+    else{
+        alert("Geolocation not supported");
+    }
+
+}
+
+function showPosition(position){
+
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    let url = "https://nominatim.openstreetmap.org/reverse?lat="+lat+"&lon="+lon+"&format=json";
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+
+        let country = data.address.country;
+        let state = data.address.state;
+        let city = data.address.city || data.address.town || data.address.village;
+
+        document.getElementById("result").innerHTML =
+        "Detected Location: " + city + ", " + state + ", " + country;
+
+        let countryDropdown = document.getElementById("country");
+        countryDropdown.innerHTML =
+        "<option>"+country+"</option>";
+
+        let stateDropdown = document.getElementById("state");
+        stateDropdown.innerHTML =
+        "<option>"+state+"</option>";
+
+        let cityDropdown = document.getElementById("city");
+        cityDropdown.innerHTML =
+        "<option>"+city+"</option>";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
